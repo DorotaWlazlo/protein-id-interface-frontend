@@ -18,7 +18,18 @@ export class MainFormComponent {
     this.searchForm = new FormGroup({
       'username': new FormControl(null),
       'email': new FormControl(null),
-      'title': new FormControl(null)
+      'title': new FormControl(null),
+      'database': new FormControl(null),
+      'taxonomy': new FormControl(null),
+      'clevages': new FormControl(null),
+      'enzyme': new FormControl(null),
+      'fixed': new FormControl(null),
+      'variable': new FormControl(null),
+      'peptide': new FormControl(null),
+      'peptideUnit': new FormControl(null),
+      'ms': new FormControl(null),
+      'msUnit': new FormControl(null),
+      'file': new FormControl(null),
     })
   }
 

@@ -3,21 +3,21 @@
         <div class="form-fields">
             <mat-form-field class="form-field">
                 <mat-label>Username</mat-label>
-                <input matInput formControlName="username"placeholder="Username" required>
+                <input matInput formControlName="username"placeholder="Username" required/>
             </mat-form-field>
 
             <mat-form-field class="form-field">
                 <mat-label>Email adress</mat-label>
-                <input matInput placeholder="example@mail.com" formControlName="email"required>
+                <input matInput placeholder="example@mail.com" formControlName="email"required/>
             </mat-form-field>
         </div>
         <mat-form-field class="large-form-field">
             <mat-label>Search title</mat-label>
-            <input formControlName="title" matInput placeholder="Title" required>
+            <input formControlName="title" matInput placeholder="Title" required/>
         </mat-form-field>
         <div class="form-fields">
             <mat-form-field class="form-field">
-                <mat-select required>
+                <mat-select formControlName="database" required>
                     <mat-option>-- None --</mat-option>
                     <mat-option value="option">Option</mat-option>
                 </mat-select>
@@ -25,7 +25,7 @@
             </mat-form-field>
             
             <mat-form-field class="form-field">
-                <mat-select required>
+                <mat-select formControlName="taxonomy"required>
                     <mat-option>-- None --</mat-option>
                     <mat-option value="option">Option</mat-option>
                 </mat-select>
@@ -34,7 +34,7 @@
         </div>
         <div class="form-fields">
             <mat-form-field class="form-field">
-                <mat-select required>
+                <mat-select formControlName="clevages"required>
                     <mat-option>-- None --</mat-option>
                     <mat-option value="option">Option</mat-option>
                 </mat-select>
@@ -42,7 +42,7 @@
             </mat-form-field>
         
             <mat-form-field class="form-field">
-                <mat-select required>
+                <mat-select formControlName="enzyme"required>
                     <mat-option>-- None --</mat-option>
                     <mat-option value="option">Option</mat-option>
                 </mat-select>
@@ -51,7 +51,7 @@
         </div>
         <div class="form-fields">
             <mat-form-field class="form-field">
-                <mat-select multiple required>
+                <mat-select formControlName="fixed" multiple required>
                     <mat-option>-- None --</mat-option>
                     <mat-option value="option">Option</mat-option>
                 </mat-select>
@@ -59,7 +59,7 @@
             </mat-form-field>
         
             <mat-form-field class="form-field">
-                <mat-select multiple required>
+                <mat-select formControlName="variable" multiple required>
                     <mat-option>-- None --</mat-option>
                     <mat-option value="option">Option</mat-option>
                 </mat-select>
@@ -69,10 +69,10 @@
         <div class="form-fields">
             <mat-form-field class="small-form-field">
                 <mat-label>Peptide tol. </mat-label>
-                <input type="number"matInput placeholder="5" required>
+                <input formControlName="peptide"type="number"matInput placeholder="5" required/>
             </mat-form-field>
             <mat-form-field class="small-form-field">
-                <mat-select required>
+                <mat-select formControlName="peptideUnit" required>
                     <mat-option>-- None --</mat-option>
                     <mat-option value="option">Option</mat-option>
                 </mat-select>
@@ -81,10 +81,10 @@
         
             <mat-form-field class="small-form-field">
                 <mat-label>MS/MS tol. </mat-label>
-                <input type="number" matInput placeholder="0.02" required>
+                <input formControlName="ms" type="number" matInput placeholder="0.02" required/>
             </mat-form-field>
             <mat-form-field class="small-form-field">
-                <mat-select required>
+                <mat-select formControlName="msUnit" required>
                     <mat-option>-- None --</mat-option>
                     <mat-option value="option">Option</mat-option>
                 </mat-select>
@@ -92,10 +92,10 @@
             </mat-form-field>
         </div>
         <div class="form-fields">
-            <mat-form-field class="form-field">
+            <div class="form-field">
                 <button type="button" mat-button (click)="fileInput.click()">Choose File</button>
-                <input requied hidden (change)="onFileSelected()" #fileInput type="file" id="file">
-            </mat-form-field>
+                <input requied hidden (change)="onFileSelected()" #fileInput type="file" id="file" formControlName="file"/>
+            </div>
             <div class="form-field">
                 <button mat-button type="submit" color="primary">Start search</button>
             </div>
