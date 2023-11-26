@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <span>Protein Identification Interface</span>
+  <span class="spacer"></span>
+  <ng-template [ngIf] = "!isAuthenticated()">
+    <div>
+        <button mat-button routerLink ="/log-in" routerLinkActive="active">Log In</button>
+        <button mat-button routerLink ="/register" routerLinkActive="active">Register</button>
+    </div>
+  </ng-template>
+  <button mat-button *ngIf="isAuthenticated()" (click)="logOut()">Logout</button>
+</mat-toolbar>
