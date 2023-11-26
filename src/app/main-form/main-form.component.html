@@ -1,1 +1,104 @@
-<p>main-form works!</p>
+<div class="container">
+    <form [formGroup]="searchForm" #formDirective="ngForm" (ngSubmit)="onSubmit(searchForm, formDirective)">
+        <div class="form-fields">
+            <mat-form-field class="form-field">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username"placeholder="Username" required>
+            </mat-form-field>
+
+            <mat-form-field class="form-field">
+                <mat-label>Email adress</mat-label>
+                <input matInput placeholder="example@mail.com" formControlName="email"required>
+            </mat-form-field>
+        </div>
+        <mat-form-field class="large-form-field">
+            <mat-label>Search title</mat-label>
+            <input formControlName="title" matInput placeholder="Title" required>
+        </mat-form-field>
+        <div class="form-fields">
+            <mat-form-field class="form-field">
+                <mat-select required>
+                    <mat-option>-- None --</mat-option>
+                    <mat-option value="option">Option</mat-option>
+                </mat-select>
+                <mat-label>Database name</mat-label>
+            </mat-form-field>
+            
+            <mat-form-field class="form-field">
+                <mat-select required>
+                    <mat-option>-- None --</mat-option>
+                    <mat-option value="option">Option</mat-option>
+                </mat-select>
+                <mat-label>Taxonmy</mat-label>
+            </mat-form-field>
+        </div>
+        <div class="form-fields">
+            <mat-form-field class="form-field">
+                <mat-select required>
+                    <mat-option>-- None --</mat-option>
+                    <mat-option value="option">Option</mat-option>
+                </mat-select>
+                <mat-label>Allow up to _ missed clevages</mat-label>
+            </mat-form-field>
+        
+            <mat-form-field class="form-field">
+                <mat-select required>
+                    <mat-option>-- None --</mat-option>
+                    <mat-option value="option">Option</mat-option>
+                </mat-select>
+                <mat-label>Enzyme</mat-label>
+            </mat-form-field>
+        </div>
+        <div class="form-fields">
+            <mat-form-field class="form-field">
+                <mat-select multiple required>
+                    <mat-option>-- None --</mat-option>
+                    <mat-option value="option">Option</mat-option>
+                </mat-select>
+                <mat-label>Fixed modifications</mat-label>
+            </mat-form-field>
+        
+            <mat-form-field class="form-field">
+                <mat-select multiple required>
+                    <mat-option>-- None --</mat-option>
+                    <mat-option value="option">Option</mat-option>
+                </mat-select>
+                <mat-label>Variable modifications</mat-label>
+            </mat-form-field>
+        </div>
+        <div class="form-fields">
+            <mat-form-field class="small-form-field">
+                <mat-label>Peptide tol. </mat-label>
+                <input type="number"matInput placeholder="5" required>
+            </mat-form-field>
+            <mat-form-field class="small-form-field">
+                <mat-select required>
+                    <mat-option>-- None --</mat-option>
+                    <mat-option value="option">Option</mat-option>
+                </mat-select>
+                <mat-label>Unit</mat-label>
+            </mat-form-field>
+        
+            <mat-form-field class="small-form-field">
+                <mat-label>MS/MS tol. </mat-label>
+                <input type="number" matInput placeholder="0.02" required>
+            </mat-form-field>
+            <mat-form-field class="small-form-field">
+                <mat-select required>
+                    <mat-option>-- None --</mat-option>
+                    <mat-option value="option">Option</mat-option>
+                </mat-select>
+                <mat-label>Unit</mat-label>
+            </mat-form-field>
+        </div>
+        <div class="form-fields">
+            <mat-form-field class="form-field">
+                <button type="button" mat-button (click)="fileInput.click()">Choose File</button>
+                <input requied hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+            </mat-form-field>
+            <div class="form-field">
+                <button mat-button type="submit" color="primary">Start search</button>
+            </div>
+        </div>
+    </form>
+</div>

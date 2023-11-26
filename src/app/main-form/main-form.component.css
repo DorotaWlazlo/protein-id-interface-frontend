@@ -1,0 +1,29 @@
+.container mat-form-field+mat-form-field {
+    margin-left: 10px;
+}
+
+.form-field {
+    width: 295px;
+}
+
+.large-form-field {
+    width: 600px;
+}
+
+.small-form-field {
+    width: 142.5px;
+}
+
+.container form {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+/* .container form>* {
+    margin: 12px 0;
+} */
+
+.form-fields {
+    display: flex;
+    align-items: flex-start;
+}
