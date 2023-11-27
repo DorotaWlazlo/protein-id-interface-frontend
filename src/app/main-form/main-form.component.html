@@ -18,16 +18,14 @@
         <div class="form-fields">
             <mat-form-field class="form-field">
                 <mat-select formControlName="database" required>
-                    <mat-option>-- None --</mat-option>
-                    <mat-option value="option">Option</mat-option>
+                    <mat-option *ngFor="let item of databases" [value]="item">{{item}}</mat-option>
                 </mat-select>
                 <mat-label>Database name</mat-label>
             </mat-form-field>
             
             <mat-form-field class="form-field">
                 <mat-select formControlName="taxonomy"required>
-                    <mat-option>-- None --</mat-option>
-                    <mat-option value="option">Option</mat-option>
+                    <mat-option *ngFor="let item of taxonomies" [value]="item">{{item}}</mat-option>
                 </mat-select>
                 <mat-label>Taxonmy</mat-label>
             </mat-form-field>
@@ -35,16 +33,14 @@
         <div class="form-fields">
             <mat-form-field class="form-field">
                 <mat-select formControlName="clevages"required>
-                    <mat-option>-- None --</mat-option>
-                    <mat-option value="option">Option</mat-option>
+                    <mat-option *ngFor="let item of clevages" [value]="item">{{item}}</mat-option>
                 </mat-select>
                 <mat-label>Allow up to _ missed clevages</mat-label>
             </mat-form-field>
         
             <mat-form-field class="form-field">
                 <mat-select formControlName="enzyme"required>
-                    <mat-option>-- None --</mat-option>
-                    <mat-option value="option">Option</mat-option>
+                    <mat-option *ngFor="let item of enzymes" [value]="item">{{item}}</mat-option>
                 </mat-select>
                 <mat-label>Enzyme</mat-label>
             </mat-form-field>
@@ -52,16 +48,14 @@
         <div class="form-fields">
             <mat-form-field class="form-field">
                 <mat-select formControlName="fixed" multiple required>
-                    <mat-option>-- None --</mat-option>
-                    <mat-option value="option">Option</mat-option>
+                    <mat-option *ngFor="let item of ptms" [value]="item">{{item}}</mat-option>
                 </mat-select>
                 <mat-label>Fixed modifications</mat-label>
             </mat-form-field>
         
             <mat-form-field class="form-field">
                 <mat-select formControlName="variable" multiple required>
-                    <mat-option>-- None --</mat-option>
-                    <mat-option value="option">Option</mat-option>
+                    <mat-option *ngFor="let item of ptms" [value]="item">{{item}}</mat-option>
                 </mat-select>
                 <mat-label>Variable modifications</mat-label>
             </mat-form-field>
@@ -73,8 +67,7 @@
             </mat-form-field>
             <mat-form-field class="small-form-field">
                 <mat-select formControlName="peptideUnit" required>
-                    <mat-option>-- None --</mat-option>
-                    <mat-option value="option">Option</mat-option>
+                    <mat-option *ngFor="let item of tolUnits" [value]="item">{{item}}</mat-option>
                 </mat-select>
                 <mat-label>Unit</mat-label>
             </mat-form-field>
@@ -85,8 +78,7 @@
             </mat-form-field>
             <mat-form-field class="small-form-field">
                 <mat-select formControlName="msUnit" required>
-                    <mat-option>-- None --</mat-option>
-                    <mat-option value="option">Option</mat-option>
+                    <mat-option *ngFor="let item of tolUnits" [value]="item">{{item}}</mat-option>
                 </mat-select>
                 <mat-label>Unit</mat-label>
             </mat-form-field>
@@ -94,10 +86,10 @@
         <div class="form-fields">
             <div class="form-field">
                 <button type="button" mat-button (click)="fileInput.click()">Choose File</button>
-                <input requied hidden (change)="onFileSelected()" #fileInput type="file" id="file" formControlName="file"/>
+                <input requied hidden (change)="onFileSelected($event)" #fileInput type="file" id="file" formControlName="file"/>
             </div>
             <div class="form-field">
-                <button mat-button type="submit" color="primary">Start search</button>
+                <button mat-raised-button [disabled]="serverService.selectedFile === undefined" type="submit" color="primary">Start search</button>
             </div>
         </div>
     </form>

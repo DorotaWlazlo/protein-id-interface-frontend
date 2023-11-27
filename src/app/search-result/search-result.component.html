@@ -1,0 +1,88 @@
+<mat-progress-spinner mode="indeterminate" *ngIf="!serverService.searchResult">
+</mat-progress-spinner>
+<div class="result-content" *ngIf="serverService.searchResult">
+    <mat-card>
+        <mat-card-content  [style.overflow]="'auto'" [style.height.px]="'650'">
+            <mat-toolbar class="result-toolbar" color="primary">{{serverService.searchResult.title}}</mat-toolbar>
+            <mat-card>
+                <mat-toolbar class="result-toolbar"> Search parameters</mat-toolbar>
+                <div class="data-fields">
+                    <mat-card-content class="data-field"> <b>Database:</b> {{serverService.searchResult.databaseName}} version
+                        {{serverService.searchResult.databaseVersion}}</mat-card-content>
+                    <mat-card-content class="data-field"> Taxonomy: {{serverService.searchResult.taxonomy}}</mat-card-content>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="data-fields">
+                    <mat-card-content class="large-data-field"> Fixed modifications:
+                        {{serverService.searchResult.ptmFix}}</mat-card-content>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="data-fields">
+                    <mat-card-content class="large-data-field"> Variable modifications:
+                        {{serverService.searchResult.ptmVar}}</mat-card-content>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="data-fields">
+                    <mat-card-content class="large-data-field"> Allowed up to {{serverService.searchResult.missedCleavages}} missed
+                        cleavages</mat-card-content>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="data-fields">
+                    <mat-card-content class="data-field"> Peptide tolerance:
+                        {{serverService.searchResult.pepTol}}</mat-card-content>
+                    <mat-card-content class="data-field"> MS/MS tolerance: {{serverService.searchResult.fragTol}}</mat-card-content>
+                </div>
+            </mat-card>
+            <mat-card>
+                <mat-toolbar class="result-toolbar"> Search results </mat-toolbar>
+                <mat-accordion multi="true">
+            
+                    <mat-expansion-panel *ngFor="let protein of serverService.searchResult.proteins">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{protein.id}}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{protein.name}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <ng-template matExpansionPanelContent>
+                            <p>Score: {{protein.score}} Peptide count: {{protein.peptideCount}}</p>
+                            <mat-accordion multi="true">
+                                <mat-expansion-panel *ngFor="let peptide of protein.peptides">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            {{peptide.sequence}}
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            Mass: {{peptide.mass}} Queries count: {{peptide.queriesCount}}
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <ng-template matExpansionPanelContent>
+                                        <mat-accordion multi="true">
+                                            <mat-expansion-panel *ngFor="let query of peptide.queries">
+                                                <mat-expansion-panel-header>
+                                                    <mat-panel-title>
+                                                        {{query.number}}
+                                                    </mat-panel-title>
+                                                    <mat-panel-description>
+                                                        Score: {{query.score}}
+                                                    </mat-panel-description>
+                                                </mat-expansion-panel-header>
+                                                <ng-template matExpansionPanelContent>
+                                                    <p>Delta PPM: {{query.deltaPPM}}</p>
+                                                    <p>Mz: {{query.mz}}</p>
+                                                    <p>Charge: {{query.charge}}</p>
+                                                </ng-template>
+                                            </mat-expansion-panel>
+                                        </mat-accordion>
+                                    </ng-template>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </ng-template>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+</div>

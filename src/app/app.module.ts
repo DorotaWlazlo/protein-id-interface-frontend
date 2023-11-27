@@ -18,7 +18,11 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/mater
 import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
-
+import { SearchResultComponent } from './search-result/search-result.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,8 @@ import {MatSelectModule} from '@angular/material/select';
     NavbarComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    MainFormComponent
+    MainFormComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,11 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule,
+    MatExpansionModule,
+    ScrollingModule,
+    MatProgressSpinnerModule
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}],
   bootstrap: [AppComponent]

@@ -1,0 +1,28 @@
+.result-content {
+    width: 800px;
+    display: block;
+    margin-top: 20px;
+    height: 650px;
+}
+
+.result-toolbar {
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.data-fields {
+    display: flex;
+    align-items: flex-start;
+}
+
+.large-data-field {
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 800px;
+}
+
+.data-field {
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 400px
+}

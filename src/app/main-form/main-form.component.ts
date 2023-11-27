@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { ServerService } from '../service/server.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-form',
@@ -7,11 +9,24 @@ import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular
   styleUrls: ['./main-form.component.css']
 })
 export class MainFormComponent {
-  srcResult: any;
-  searchForm!: FormGroup;
+  constructor (public serverService: ServerService,
+              private router: Router) {}
+
+  searchForm: FormGroup;
+  enzymes: string[];
+  databases: string[];
+  taxonomies: string[];
+  ptms: string[];
+  tolUnits: string[];
+  clevages: number[] = [0,1,2,3,4,5,6,7,8,9];
 
   ngOnInit() {
    this.createForm();
+   this.getEnzymes();
+   this.getDatabase();
+   this.getPtm();
+   this.getTaxonomy();
+   this.getTolUnit();
   }
 
   createForm(){
@@ -33,21 +48,46 @@ export class MainFormComponent {
     })
   }
 
+  getEnzymes() {
+    this.serverService.getEnzymes().subscribe((data) => {
+      this.enzymes = data;
+    })
+  }
+
+  getDatabase() {
+    this.serverService.getDatabase().subscribe((data) => {
+      this.databases = data;
+    })
+  }
+
+  getTaxonomy() {
+    this.serverService.getTaxonomy().subscribe((data) => {
+      this.taxonomies = data;
+    })
+  }
+
+  getPtm() {
+    this.serverService.getPtm().subscribe((data) => {
+      this.ptms = data;
+    })
+  }
+
+  getTolUnit() {
+    this.serverService.getTolUnit().subscribe((data) => {
+      this.tolUnits = data;
+    })
+  }
+
   onSubmit( formData: FormGroup, searchDirective: FormGroupDirective){
-    
+    this.router.navigate(['/result']);
+    this.serverService.startSearch(formData,searchDirective).subscribe((data) => {
+      this.serverService.searchResult = data;
+      console.log(data)
+    })
   }
 
-  onFileSelected() {
-  const inputNode: any = document.querySelector('#file');
-
-  if (typeof (FileReader) !== 'undefined') {
-    const reader = new FileReader();
-
-    reader.onload = (e: any) => {
-      this.srcResult = e.target.result;
-    };
-
-    reader.readAsArrayBuffer(inputNode.files[0]);
+  onFileSelected(event: any) {
+    this.serverService.selectedFile = event.target.files[0];
   }
-}
+  
 }
