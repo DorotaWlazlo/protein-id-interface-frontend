@@ -14,23 +14,23 @@ export class ServerService {
   searchResult: any;
 
   getEnzymes(): Observable<string[]> {
-    return this.http.get<string[]>(`${environment.apiUrl}enzymeNames`)
+    return this.http.get<string[]>(`${environment.apiUrl}search/enzymeNames`)
   }
 
   getDatabase(): Observable<string[]> {
-    return this.http.get<string[]>(`${environment.apiUrl}databaseNames`)
+    return this.http.get<string[]>(`${environment.apiUrl}search/databaseNames`)
   }
 
   getTaxonomy(): Observable<string[]> {
-    return this.http.get<string[]>(`${environment.apiUrl}taxonomy`)
+    return this.http.get<string[]>(`${environment.apiUrl}search/taxonomy`)
   }
 
   getPtm(): Observable<string[]> {
-    return this.http.get<string[]>(`${environment.apiUrl}ptmNames`)
+    return this.http.get<string[]>(`${environment.apiUrl}search/ptmNames`)
   }
 
   getTolUnit(): Observable<string[]> {
-    return this.http.get<string[]>(`${environment.apiUrl}tolUnitNames`)
+    return this.http.get<string[]>(`${environment.apiUrl}search/tolUnitNames`)
   }
 
   startSearch(formData: FormGroup, searchDirective: FormGroupDirective): Observable<any> {
@@ -50,7 +50,7 @@ export class ServerService {
     sendFormData.append('taxonomy', formData.value.taxonomy);
     sendFormData.append('file', this.selectedFile);
 
-    return this.http.post<any>(`${environment.apiUrl}`, sendFormData);
+    return this.http.post<any>(`${environment.apiUrl}search/`, sendFormData);
   }
 
   logout() {
@@ -64,6 +64,19 @@ export class ServerService {
   }
 
   signInUser(name: string, password: string) {
+    const body = {
+      login: name,
+      password: password,
+    }
+    return this.http.post<any>(`${environment.apiUrl}auth/login`, body);
+  }
 
+  registerUser(email: string, password: string, username: string) {
+    const body = {
+      email: email,
+      username: username,
+      password: password,
+    }
+    return this.http.post<any>(`${environment.apiUrl}auth/register`, body);
   }
 }

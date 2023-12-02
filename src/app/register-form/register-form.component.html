@@ -1,1 +1,36 @@
-<p>register-form works!</p>
+<form>
+    <div class="login-container">
+        <div class="login-content">
+            <mat-toolbar class="login-toolbar" color="primary">Log into your account</mat-toolbar>
+            <mat-card>
+                <form [formGroup]="registerForm" #formDirective="ngForm" (ngSubmit)="onSubmit(registerForm, formDirective)">
+                    <mat-form-field>
+                        <mat-icon matPrefix>email</mat-icon>
+                        <input autofocus type="email" matInput placeholder="Email" formControlName="email" required>
+                        <mat-error *ngIf="checkValidation('email')">
+                            {{ emailErrors() }}
+                        </mat-error>
+                        <mat-label>Email</mat-label>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-icon matPrefix>person_outline</mat-icon>
+                        <input autofocus type="text" matInput placeholder="Username" formControlName="username" required>
+                        <mat-label>Username</mat-label>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-icon matPrefix>lock_outline</mat-icon>
+                        <input type="password" autocomplete="false" matInput placeholder="Password *" formControlName="password" required>
+                        <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number</mat-hint>
+                        <mat-error *ngIf="checkValidation('password')">
+                            {{ getErrorPassword() }}
+                        </mat-error>
+                        <mat-label>Password</mat-label>
+                    </mat-form-field>
+
+                    <button type="submit" mat-raised-button class="mat-raised-button" color="primary">LOGIN</button>
+                </form>
+            </mat-card>
+        </div>
+    </div>

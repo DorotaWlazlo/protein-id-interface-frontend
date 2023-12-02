@@ -26,7 +26,7 @@ export class LoginFormComponent implements OnInit {
   onSubmit( formData: FormGroup, loginDirective: FormGroupDirective){
     const email = formData.value.email;
     const password = formData.value.password;
-    this.serverService.signInUser(email, password);
+    this.serverService.signInUser(email, password).subscribe((data)=>console.log(data));
   }
 
 }
