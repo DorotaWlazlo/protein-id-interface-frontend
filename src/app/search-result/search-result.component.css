@@ -2,7 +2,7 @@
     width: 800px;
     display: block;
     margin-top: 20px;
-    height: 650px;
+    height: 590px;
 }
 
 .result-toolbar {
@@ -25,4 +25,17 @@
     justify-content: center;
     margin-bottom: 10px;
     width: 400px
+}
+
+.container {
+    height: 90%;
+    width: 100%;
+    align-items: center;
+    display: flex;
+}
+
+.container-content {
+    width: 800px;
+    display: block;
+    margin: 0 auto;
 }

@@ -1,42 +1,30 @@
-<mat-progress-spinner mode="indeterminate" *ngIf="!serverService.searchResult">
-</mat-progress-spinner>
+<div class="container">
+    <div class="container-content">
+<div class="result-content" *ngIf="!serverService.searchResult">
+    <mat-progress-spinner mode="indeterminate" style="margin-left: 300px;">
+    </mat-progress-spinner>
+</div>
 <div class="result-content" *ngIf="serverService.searchResult">
     <mat-card>
-        <mat-card-content  [style.overflow]="'auto'" [style.height.px]="'650'">
-            <mat-toolbar class="result-toolbar" color="primary">{{serverService.searchResult.title}}</mat-toolbar>
+        <mat-card-content  [style.overflow]="'auto'" [style.height.px]="'600'">
+            <mat-toolbar class="result-toolbar" color="primary" variant="dense">{{serverService.searchResult.title}}</mat-toolbar>
             <mat-card>
-                <mat-toolbar class="result-toolbar"> Search parameters</mat-toolbar>
-                <div class="data-fields">
-                    <mat-card-content class="data-field"> <b>Database:</b> {{serverService.searchResult.databaseName}} version
-                        {{serverService.searchResult.databaseVersion}}</mat-card-content>
-                    <mat-card-content class="data-field"> Taxonomy: {{serverService.searchResult.taxonomy}}</mat-card-content>
-                </div>
-                <mat-divider></mat-divider>
-                <div class="data-fields">
-                    <mat-card-content class="large-data-field"> Fixed modifications:
-                        {{serverService.searchResult.ptmFix}}</mat-card-content>
-                </div>
-                <mat-divider></mat-divider>
-                <div class="data-fields">
-                    <mat-card-content class="large-data-field"> Variable modifications:
-                        {{serverService.searchResult.ptmVar}}</mat-card-content>
-                </div>
-                <mat-divider></mat-divider>
-                <div class="data-fields">
-                    <mat-card-content class="large-data-field"> Allowed up to {{serverService.searchResult.missedCleavages}} missed
-                        cleavages</mat-card-content>
-                </div>
-                <mat-divider></mat-divider>
-                <div class="data-fields">
-                    <mat-card-content class="data-field"> Peptide tolerance:
-                        {{serverService.searchResult.pepTol}}</mat-card-content>
-                    <mat-card-content class="data-field"> MS/MS tolerance: {{serverService.searchResult.fragTol}}</mat-card-content>
-                </div>
+                <mat-toolbar class="result-toolbar" variant="dense"> Search parameters</mat-toolbar>
+                <mat-grid-list cols="2" rowHeight="50px">
+                    <mat-grid-tile><div><b>Database: </b> {{serverService.searchResult.databaseName}} v. {{serverService.searchResult.databaseVersion}}</div></mat-grid-tile>
+                    <mat-grid-tile><b>Taxonomy: </b> {{serverService.searchResult.taxonomy}}</mat-grid-tile>
+                    <mat-grid-tile [colspan]="2"><b>Fixed modifications: </b> {{serverService.searchResult.ptmFix}}</mat-grid-tile>
+                    <mat-grid-tile [colspan]="2"><b>Variable modifications: </b> {{serverService.searchResult.ptmVar}}</mat-grid-tile>
+                    <mat-grid-tile [colspan]="2"> Allowed up to<b> {{serverService.searchResult.missedCleavages}} </b>missed cleavages</mat-grid-tile>
+                    <mat-grid-tile><b>Peptide tolerance: </b> {{serverService.searchResult.pepTol.split(" ").shift()}}</mat-grid-tile>
+                    <mat-grid-tile><b>MS/MS tolerance: </b> {{serverService.searchResult.fragTol.split(" ").shift()}} </mat-grid-tile>
+                    <mat-grid-tile><button type="button" mat-button (click)="download('mgf')">Mgf file</button></mat-grid-tile>
+                    <mat-grid-tile><button type="button" mat-button (click)="download('out')">Out file</button> </mat-grid-tile>
+                </mat-grid-list>
             </mat-card>
             <mat-card>
-                <mat-toolbar class="result-toolbar"> Search results </mat-toolbar>
+                <mat-toolbar class="result-toolbar" variant="dense"> Search results </mat-toolbar>
                 <mat-accordion multi="true">
-            
                     <mat-expansion-panel *ngFor="let protein of serverService.searchResult.proteins">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
@@ -85,4 +73,6 @@
             </mat-card>
         </mat-card-content>
     </mat-card>
+</div>
+</div>
 </div>
