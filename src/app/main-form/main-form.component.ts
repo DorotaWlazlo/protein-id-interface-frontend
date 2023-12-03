@@ -46,7 +46,6 @@ export class MainFormComponent {
       'msUnit': new FormControl(null),
       'file': new FormControl(null),
     })
-    console.log(this.searchForm.controls['variable'].value)
   }
 
   getEnzymes() {

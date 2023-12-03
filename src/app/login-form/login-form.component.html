@@ -17,6 +17,10 @@
                         <mat-label>Password</mat-label>
                     </mat-form-field>
 
+                    <mat-error *ngIf="error">
+                        {{ error }}
+                    </mat-error>
+
                     <button type="submit" mat-raised-button class="mat-raised-button"color="primary">LOGIN</button>
                 </form>
                 <span> If You don't have a account yet please <a routerLink='/register'>REGISTER HERE</a></span>

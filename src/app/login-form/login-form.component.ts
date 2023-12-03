@@ -11,6 +11,7 @@ export class LoginFormComponent implements OnInit {
   constructor (public serverService: ServerService) {}
 
   loginForm!: FormGroup;
+  error: string | null;
 
   ngOnInit() {
    this.createForm();
@@ -26,7 +27,18 @@ export class LoginFormComponent implements OnInit {
   onSubmit( formData: FormGroup, loginDirective: FormGroupDirective){
     const email = formData.value.email;
     const password = formData.value.password;
-    this.serverService.signInUser(email, password).subscribe((data)=>console.log(data));
+    this.serverService.signInUser(email, password).subscribe(
+      res => {
+        console.log(res);
+        window.localStorage.setItem("token", res.token);
+        this.serverService.router.navigate(['/']);
+      },
+      err => {
+        console.log(err);
+        this.error = err.error.message;
+        this.loginForm.controls['password'].reset()
+      }
+    );
   }
 
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
@@ -8,10 +9,11 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class ServerService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public router: Router) { }
 
   selectedFile: File;
   searchResult: any;
+
 
   getEnzymes(): Observable<string[]> {
     return this.http.get<string[]>(`${environment.apiUrl}search/enzymeNames`)
@@ -50,17 +52,31 @@ export class ServerService {
     sendFormData.append('taxonomy', formData.value.taxonomy);
     sendFormData.append('file', this.selectedFile);
 
-    return this.http.post<any>(`${environment.apiUrl}search/`, sendFormData);
+    let headers = this.addAuthHeader()
+    return this.http.post<any>(`${environment.apiUrl}search/`, sendFormData, {headers: headers});
   }
 
   logout() {
+    window.localStorage.removeItem("token");
+    this.router.navigate(['/']);
   }
 
   getToken() {
+    return window.localStorage.getItem("token");
   }
 
   isAuthenticated() {
-    return false
+    return this.getToken() !== null ? true : false;
+  }
+
+  addAuthHeader() {
+    let headers = {};
+
+    if (this.isAuthenticated()) {
+      headers = {"Authorization": "Bearer " + this.getToken()}
+    }
+
+    return headers;
   }
 
   signInUser(name: string, password: string) {
