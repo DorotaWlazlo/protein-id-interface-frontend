@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <span>Protein Identification Interface</span>
+  <button mat-button (click)="main()">Protein Identification Interface</button>
   <span class="spacer"></span>
   <ng-template [ngIf] = "!isAuthenticated()">
     <div>
@@ -7,5 +7,18 @@
         <button mat-button routerLink ="/register" routerLinkActive="active">Register</button>
     </div>
   </ng-template>
-  <button mat-button *ngIf="isAuthenticated()" (click)="logOut()">Logout</button>
+  <ng-template [ngIf] = "isAuthenticated()">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>person_outline</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="history()">
+        <span>History</span>
+      </button>
+      <button mat-menu-item (click)="logOut()">
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+    <span>{{getUsername()}}</span>
+  </ng-template>
 </mat-toolbar>

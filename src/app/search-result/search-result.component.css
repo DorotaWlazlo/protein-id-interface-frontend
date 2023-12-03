@@ -27,6 +27,10 @@
     width: 400px
 }
 
+.mat-raised-button {
+    width: 400px;
+}
+
 .container {
     height: 90%;
     width: 100%;

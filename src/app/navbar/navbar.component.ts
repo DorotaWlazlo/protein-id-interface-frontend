@@ -13,6 +13,18 @@ export class NavbarComponent {
     this.serverService.logout();
   }
 
+  getUsername() {
+    return window.localStorage.getItem("username");
+  }
+
+  history() {
+    this.serverService.router.navigate(['history']);
+  }
+
+  main() {
+    this.serverService.router.navigate(['/']);
+  }
+
   isAuthenticated() {
     return this.serverService.isAuthenticated();
   }

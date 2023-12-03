@@ -31,6 +31,7 @@ export class LoginFormComponent implements OnInit {
       res => {
         console.log(res);
         window.localStorage.setItem("token", res.token);
+        window.localStorage.setItem("username", res.username);
         this.serverService.router.navigate(['/']);
       },
       err => {

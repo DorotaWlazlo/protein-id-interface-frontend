@@ -24,6 +24,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
+import { HistoryComponent } from './history/history.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     LoginFormComponent,
     RegisterFormComponent,
     MainFormComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatExpansionModule,
     ScrollingModule,
     MatProgressSpinnerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatMenuModule,
+    MatSidenavModule
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}],
   bootstrap: [AppComponent]

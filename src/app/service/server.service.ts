@@ -58,6 +58,7 @@ export class ServerService {
 
   logout() {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("username");
     this.router.navigate(['/']);
   }
 
@@ -67,6 +68,15 @@ export class ServerService {
 
   isAuthenticated() {
     return this.getToken() !== null ? true : false;
+  }
+
+  getSearches(): Observable<any[]> {
+    let username = window.localStorage.getItem("username")
+    console.log(username)
+    let headers = {"Authorization": "Bearer " + this.getToken()}
+    const sendFormData = new FormData();
+    sendFormData.append('username', username!)
+    return this.http.post<any[]>(`${environment.apiUrl}auth/searches`, sendFormData)
   }
 
   addAuthHeader() {

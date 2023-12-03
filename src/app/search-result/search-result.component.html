@@ -12,14 +12,14 @@
                 <mat-toolbar class="result-toolbar" variant="dense"> Search parameters</mat-toolbar>
                 <mat-grid-list cols="2" rowHeight="50px">
                     <mat-grid-tile><div><b>Database: </b> {{serverService.searchResult.databaseName}} v. {{serverService.searchResult.databaseVersion}}</div></mat-grid-tile>
-                    <mat-grid-tile><b>Taxonomy: </b> {{serverService.searchResult.taxonomy}}</mat-grid-tile>
-                    <mat-grid-tile [colspan]="2"><b>Fixed modifications: </b> {{serverService.searchResult.ptmFix}}</mat-grid-tile>
-                    <mat-grid-tile [colspan]="2"><b>Variable modifications: </b> {{serverService.searchResult.ptmVar}}</mat-grid-tile>
-                    <mat-grid-tile [colspan]="2"> Allowed up to<b> {{serverService.searchResult.missedCleavages}} </b>missed cleavages</mat-grid-tile>
-                    <mat-grid-tile><b>Peptide tolerance: </b> {{serverService.searchResult.pepTol.split(" ").shift()}}</mat-grid-tile>
-                    <mat-grid-tile><b>MS/MS tolerance: </b> {{serverService.searchResult.fragTol.split(" ").shift()}} </mat-grid-tile>
-                    <mat-grid-tile><button type="button" mat-button (click)="download('mgf')">Mgf file</button></mat-grid-tile>
-                    <mat-grid-tile><button type="button" mat-button (click)="download('out')">Out file</button> </mat-grid-tile>
+                    <mat-grid-tile><div><b>Taxonomy: </b> {{serverService.searchResult.taxonomy}}</div></mat-grid-tile>
+                    <mat-grid-tile [colspan]="2"><div><b>Fixed modifications: </b> {{serverService.searchResult.ptmFix}}</div></mat-grid-tile>
+                    <mat-grid-tile [colspan]="2"><div><b>Variable modifications: </b> {{serverService.searchResult.ptmVar}}</div></mat-grid-tile>
+                    <mat-grid-tile [colspan]="2"><div> Allowed up to<b> {{serverService.searchResult.missedCleavages}} </b>missed cleavages</div></mat-grid-tile>
+                    <mat-grid-tile><div><b>Peptide tolerance: </b> {{serverService.searchResult.pepTol.split(" ").shift()}}</div></mat-grid-tile>
+                    <mat-grid-tile><div><b>MS/MS tolerance: </b> {{serverService.searchResult.fragTol.split(" ").shift()}} </div></mat-grid-tile>
+                    <mat-grid-tile><button type="button" mat-raised-button class="mat-raised-button" color="primary" (click)="download('mgf')">Mgf file</button></mat-grid-tile>
+                    <mat-grid-tile><button type="button" mat-raised-button class="mat-raised-button" color="primary" (click)="download('out')">Out file</button> </mat-grid-tile>
                 </mat-grid-list>
             </mat-card>
             <mat-card>
