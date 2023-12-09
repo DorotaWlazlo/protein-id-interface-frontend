@@ -21,6 +21,15 @@
                     <mat-grid-tile><button type="button" mat-raised-button class="mat-raised-button" color="primary" (click)="download('mgf')">Mgf file</button></mat-grid-tile>
                     <mat-grid-tile><button type="button" mat-raised-button class="mat-raised-button" color="primary" (click)="download('out')">Out file</button> </mat-grid-tile>
                 </mat-grid-list>
+                <mat-grid-list cols="4" rowHeight="50px">
+                    <mat-grid-tile ><button mat-button class="mat-raised-button" (click)="sortItemsByScore()">Score <mat-icon>keyboard_arrow_down</mat-icon></button></mat-grid-tile>
+                    <mat-grid-tile><button mat-button class="mat-raised-button" (click)="sortItemsByScoreDescending()">Score <mat-icon>keyboard_arrow_up</mat-icon></button></mat-grid-tile>
+                    <mat-grid-tile><button mat-button class="mat-raised-button" (click)="sortItemsByPeptideCount()">Peptide count <mat-icon>keyboard_arrow_down</mat-icon></button></mat-grid-tile>
+                    <mat-grid-tile><button mat-button class="mat-raised-button" (click)="sortItemsByPeptideCountDescending()">Peptide count <mat-icon>keyboard_arrow_up</mat-icon></button></mat-grid-tile>
+                </mat-grid-list>
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+                </mat-form-field>
             </mat-card>
             <mat-card>
                 <mat-toolbar class="result-toolbar" variant="dense"> Search results </mat-toolbar>
@@ -28,7 +37,7 @@
                     <mat-expansion-panel *ngFor="let protein of serverService.searchResult.proteins">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                               <a href="https://www.uniprot.org/uniprotkb/{{protein.id}}/entry" target="_blank"> {{protein.id}} </a>
+                               <a href="https://www.uniprot.org/uniprotkb/{{protein.id.split('_').pop()}}/entry" target="_blank"> {{protein.id}} </a>
                             </mat-panel-title>
                             <mat-panel-description>
                                 {{protein.name}}

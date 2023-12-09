@@ -88,7 +88,7 @@ export class ServerService {
     let headers = {"Authorization": "Bearer " + this.getToken()}
     const sendFormData = new FormData();
     sendFormData.append('username', username!)
-    return this.http.post<any[]>(`${environment.apiUrl}auth/searches`, sendFormData)
+    return this.http.post<any[]>(`${environment.apiUrl}auth/searches`, sendFormData, {headers: headers})
   }
 
   addAuthHeader() {

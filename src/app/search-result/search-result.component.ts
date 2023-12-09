@@ -10,6 +10,8 @@ export class SearchResultComponent {
 
   constructor (public serverService: ServerService, private changeDetectorRef: ChangeDetectorRef) {}
 
+  proteins: any[] = this.serverService.searchResult.proteins;
+
   download(fileType: string) {
     let bytes;
 
@@ -33,18 +35,22 @@ export class SearchResultComponent {
     link.click();
   }
 
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-  // dataSource: MatTableDataSource<Card> = new MatTableDataSource<Card>(DATA);
+  sortItemsByScore() {
+    this.serverService.searchResult.proteins.sort((a: { score: number; }, b: { score: number; }) => b.score - a.score)
+  }
+  sortItemsByPeptideCount() {
+    this.serverService.searchResult.proteins.sort((a: { peptideCount: number; }, b: { peptideCount: number; }) => b.peptideCount - a.peptideCount) 
+  }
+  sortItemsByScoreDescending() {
+    this.serverService.searchResult.proteins.sort((a: { score: number; }, b: { score: number; }) => a.score - b.score) 
+  }
+  sortItemsByPeptideCountDescending() {
+    this.serverService.searchResult.proteins.sort((a: { peptideCount: number; }, b: { peptideCount: number; }) => a.peptideCount - b.peptideCount)   
+  }
 
-  // ngOnInit() {
-  //   this.changeDetectorRef.detectChanges();
-  //   this.dataSource.paginator = this.paginator;
-  //   this.obs = this.dataSource.connect();
-  // }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.serverService.searchResult.proteins = this.proteins.filter((el: { name: string }) => el.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
+}
 
-  // ngOnDestroy() {
-  //   if (this.dataSource) { 
-  //     this.dataSource.disconnect(); 
-  //   }
-  // }
 }
