@@ -31,21 +31,25 @@ export class MainFormComponent {
 
   createForm(){
     this.searchForm = new FormGroup({
-      'username': new FormControl(null),
-      'email': new FormControl(null),
+      'username': new FormControl(window.localStorage.getItem("username")),
+      'email': new FormControl(window.localStorage.getItem("email")),
       'title': new FormControl(null),
-      'database': new FormControl(null),
-      'taxonomy': new FormControl(null),
-      'clevages': new FormControl(null),
-      'enzyme': new FormControl(null),
-      'fixed': new FormControl(null),
-      'variable': new FormControl(null),
-      'peptide': new FormControl(null),
-      'peptideUnit': new FormControl(null),
-      'ms': new FormControl(null),
-      'msUnit': new FormControl(null),
+      'database': new FormControl("SwissProt"),
+      'taxonomy': new FormControl("Homo Sapiens"),
+      'clevages': new FormControl(2),
+      'enzyme': new FormControl("Trypsin"),
+      'fixed': new FormControl(["Acetyl (K)"]),
+      'variable': new FormControl(["Oxidation (M)"]),
+      'peptide': new FormControl(5),
+      'peptideUnit': new FormControl("ppm"),
+      'ms': new FormControl(0.2),
+      'msUnit': new FormControl("Da"),
       'file': new FormControl(null),
     })
+    if (window.localStorage.getItem("username")) {
+      this.searchForm.controls['username'].disable()
+      this.searchForm.controls['email'].disable()
+    }
   }
 
   getEnzymes() {

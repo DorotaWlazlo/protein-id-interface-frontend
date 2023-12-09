@@ -10,6 +10,8 @@ import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular
 export class RegisterFormComponent {
   constructor (public serverService: ServerService) {}
   registerForm: FormGroup;
+  hide = true;
+
 
   ngOnInit() {
    this.createForm();

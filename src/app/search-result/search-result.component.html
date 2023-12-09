@@ -16,8 +16,8 @@
                     <mat-grid-tile [colspan]="2"><div><b>Fixed modifications: </b> {{serverService.searchResult.ptmFix}}</div></mat-grid-tile>
                     <mat-grid-tile [colspan]="2"><div><b>Variable modifications: </b> {{serverService.searchResult.ptmVar}}</div></mat-grid-tile>
                     <mat-grid-tile [colspan]="2"><div> Allowed up to<b> {{serverService.searchResult.missedCleavages}} </b>missed cleavages</div></mat-grid-tile>
-                    <mat-grid-tile><div><b>Peptide tolerance: </b> {{serverService.searchResult.pepTol.split(" ").shift()}}</div></mat-grid-tile>
-                    <mat-grid-tile><div><b>MS/MS tolerance: </b> {{serverService.searchResult.fragTol.split(" ").shift()}} </div></mat-grid-tile>
+                    <mat-grid-tile><div><b>Peptide tolerance: </b> {{serverService.searchResult.pepTol.split(" ").shift()}} {{serverService.searchResult.pepUnit}}</div></mat-grid-tile>
+                    <mat-grid-tile><div><b>MS/MS tolerance: </b> {{serverService.searchResult.fragTol.split(" ").shift()}} {{serverService.searchResult.fragUnit}}</div></mat-grid-tile>
                     <mat-grid-tile><button type="button" mat-raised-button class="mat-raised-button" color="primary" (click)="download('mgf')">Mgf file</button></mat-grid-tile>
                     <mat-grid-tile><button type="button" mat-raised-button class="mat-raised-button" color="primary" (click)="download('out')">Out file</button> </mat-grid-tile>
                 </mat-grid-list>
@@ -28,7 +28,7 @@
                     <mat-expansion-panel *ngFor="let protein of serverService.searchResult.proteins">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                {{protein.id}}
+                               <a href="https://www.uniprot.org/uniprotkb/{{protein.id}}/entry" target="_blank"> {{protein.id}} </a>
                             </mat-panel-title>
                             <mat-panel-description>
                                 {{protein.name}}

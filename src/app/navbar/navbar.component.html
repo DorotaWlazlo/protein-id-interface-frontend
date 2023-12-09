@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <button mat-button (click)="main()">Protein Identification Interface</button>
+  <span mat-button (click)="main()" style="cursor: pointer">Protein Identification Interface</span>
   <span class="spacer"></span>
   <ng-template [ngIf] = "!isAuthenticated()">
     <div>

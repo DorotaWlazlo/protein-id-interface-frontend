@@ -1,3 +1,13 @@
-
-<button *ngFor="let search of searches"mat-raised-button class="mat-raised-button"color="primary" (click)="getSearch(search.id)">{{ search.title }}</button>
-
+<div class="column"> 
+    <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef class="header" > Search history </th>
+            <td mat-cell (click)="getSearch(search.searchResult)" style="cursor: pointer" *matCellDef="let search"> {{search.title}} </td>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </ng-container>
+    </table>
+</div>
+<div class = "large-column" *ngIf="clicked">
+ <app-search-result></app-search-result>
+</div>

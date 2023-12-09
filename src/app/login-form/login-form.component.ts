@@ -12,6 +12,7 @@ export class LoginFormComponent implements OnInit {
 
   loginForm!: FormGroup;
   error: string | null;
+  hide = true;
 
   ngOnInit() {
    this.createForm();
@@ -32,6 +33,7 @@ export class LoginFormComponent implements OnInit {
         console.log(res);
         window.localStorage.setItem("token", res.token);
         window.localStorage.setItem("username", res.username);
+        window.localStorage.setItem("email", res.email);
         this.serverService.router.navigate(['/']);
       },
       err => {

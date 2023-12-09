@@ -37,8 +37,18 @@ export class ServerService {
 
   startSearch(formData: FormGroup, searchDirective: FormGroupDirective): Observable<any> {
     const sendFormData = new FormData();
-    sendFormData.append('name', formData.value.username);
-    sendFormData.append('email', formData.value.email);
+    if (window.localStorage.getItem("username")) {
+      sendFormData.append('name', window.localStorage.getItem("username")!);
+      console.log(window.localStorage.getItem("username"))
+      console.log(formData.value.enzyme)
+      sendFormData.append('email', window.localStorage.getItem("email")!);
+    } else {
+      sendFormData.append('name', formData.value.username);
+      console.log(formData.value.username)
+      console.log("here")
+      sendFormData.append('email', formData.value.email);
+    }
+    
     sendFormData.append('title', formData.value.title);
     sendFormData.append('databaseName', formData.value.database);
     sendFormData.append('enzyme', formData.value.enzyme);
@@ -59,7 +69,9 @@ export class ServerService {
   logout() {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("username");
+    window.localStorage.removeItem("email");
     this.router.navigate(['/']);
+    window.location.reload();
   }
 
   getToken() {

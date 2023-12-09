@@ -21,12 +21,17 @@
 
                     <mat-form-field>
                         <mat-icon matPrefix>lock_outline</mat-icon>
-                        <input type="password" autocomplete="false" matInput placeholder="Password *" formControlName="password" required>
+                        <input matInput [type]="hide ? 'password' : 'text'" autocomplete="false" placeholder="Password"
+                            formControlName="password" required>
+                        <mat-label>Password</mat-label>
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
                         <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number</mat-hint>
                         <mat-error *ngIf="checkValidation('password')">
                             {{ getErrorPassword() }}
                         </mat-error>
-                        <mat-label>Password</mat-label>
                     </mat-form-field>
 
                     <button type="submit" mat-raised-button class="mat-raised-button" color="primary">REGISTER</button>
