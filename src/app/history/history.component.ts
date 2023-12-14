@@ -23,14 +23,16 @@ export class HistoryComponent implements OnInit{
     this.clicked = false;
     this.serverService.getSearches().subscribe(res => {
       this.searches = res
-      console.log(res)
       this.dataSource = this.searches;
-      console.log(this.dataSource)
     })
   }
 
-  getSearch(search: any) {
+  getSearch(search: number) {
     this.clicked = true;
-    this.serverService.searchResult = search
+    this.serverService.searchResult = null;
+    this.serverService.getSearchById(search).subscribe(res => {
+      this.serverService.searchResult = res
+      this.serverService.proteins = this.serverService.searchResult.proteins
+    })
   }
 }

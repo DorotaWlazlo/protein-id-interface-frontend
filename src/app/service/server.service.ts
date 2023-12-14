@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ export class ServerService {
 
   selectedFile: File;
   searchResult: any;
+  proteins: any[];
 
 
   getEnzymes(): Observable<string[]> {
@@ -35,17 +36,17 @@ export class ServerService {
     return this.http.get<string[]>(`${environment.apiUrl}search/tolUnitNames`)
   }
 
+  getSearchById(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}search/${id}`)
+  }
+
   startSearch(formData: FormGroup, searchDirective: FormGroupDirective): Observable<any> {
     const sendFormData = new FormData();
     if (window.localStorage.getItem("username")) {
       sendFormData.append('name', window.localStorage.getItem("username")!);
-      console.log(window.localStorage.getItem("username"))
-      console.log(formData.value.enzyme)
       sendFormData.append('email', window.localStorage.getItem("email")!);
     } else {
       sendFormData.append('name', formData.value.username);
-      console.log(formData.value.username)
-      console.log("here")
       sendFormData.append('email', formData.value.email);
     }
     
@@ -62,16 +63,16 @@ export class ServerService {
     sendFormData.append('taxonomy', formData.value.taxonomy);
     sendFormData.append('file', this.selectedFile);
 
-    let headers = this.addAuthHeader()
-    return this.http.post<any>(`${environment.apiUrl}search/`, sendFormData, {headers: headers});
+    return this.http.post<any>(`${environment.apiUrl}search/`, sendFormData);
   }
 
   logout() {
+    this.router.navigate(['/']).then(() => {
+    window.location.reload();
+    });
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("username");
     window.localStorage.removeItem("email");
-    this.router.navigate(['/']);
-    window.location.reload();
   }
 
   getToken() {
@@ -84,21 +85,18 @@ export class ServerService {
 
   getSearches(): Observable<any[]> {
     let username = window.localStorage.getItem("username")
-    console.log(username)
-    let headers = {"Authorization": "Bearer " + this.getToken()}
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
     const sendFormData = new FormData();
     sendFormData.append('username', username!)
     return this.http.post<any[]>(`${environment.apiUrl}auth/searches`, sendFormData, {headers: headers})
   }
 
-  addAuthHeader() {
-    let headers = {};
-
+  addAuthHeader(headers: HttpHeaders) {
     if (this.isAuthenticated()) {
-      headers = {"Authorization": "Bearer " + this.getToken()}
+      headers = headers.append('Authorization', 'Bearer ' + this.getToken())
     }
-
-    return headers;
+    return headers
   }
 
   signInUser(name: string, password: string) {

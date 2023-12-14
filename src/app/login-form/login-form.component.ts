@@ -30,14 +30,12 @@ export class LoginFormComponent implements OnInit {
     const password = formData.value.password;
     this.serverService.signInUser(email, password).subscribe(
       res => {
-        console.log(res);
         window.localStorage.setItem("token", res.token);
         window.localStorage.setItem("username", res.username);
         window.localStorage.setItem("email", res.email);
         this.serverService.router.navigate(['/']);
       },
       err => {
-        console.log(err);
         this.error = err.error.message;
         this.loginForm.controls['password'].reset()
       }

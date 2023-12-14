@@ -83,10 +83,11 @@ export class MainFormComponent {
   }
 
   onSubmit( formData: FormGroup, searchDirective: FormGroupDirective){
+    this.serverService.searchResult = null;
     this.router.navigate(['/result']);
     this.serverService.startSearch(formData,searchDirective).subscribe((data) => {
       this.serverService.searchResult = data;
-      console.log(data)
+      this.serverService.proteins = this.serverService.searchResult.proteins;
     })
   }
 

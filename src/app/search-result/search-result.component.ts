@@ -10,8 +10,6 @@ export class SearchResultComponent {
 
   constructor (public serverService: ServerService, private changeDetectorRef: ChangeDetectorRef) {}
 
-  proteins: any[] = this.serverService.searchResult.proteins;
-
   download(fileType: string) {
     let bytes;
 
@@ -50,7 +48,7 @@ export class SearchResultComponent {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.serverService.searchResult.proteins = this.proteins.filter((el: { name: string }) => el.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
+    this.serverService.searchResult.proteins = this.serverService.proteins.filter((el: { name: string }) => el.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
 }
 
 }

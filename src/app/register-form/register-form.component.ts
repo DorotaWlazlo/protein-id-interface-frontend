@@ -11,6 +11,8 @@ export class RegisterFormComponent {
   constructor (public serverService: ServerService) {}
   registerForm: FormGroup;
   hide = true;
+  registerSucess:boolean = false;
+  error: string | null;
 
 
   ngOnInit() {
@@ -49,8 +51,16 @@ export class RegisterFormComponent {
     const email = formData.value.email;
     const password = formData.value.password;
     const username = formData.value.username;
-    this.serverService.registerUser(email, password, username).subscribe((data)=>console.log(data));
-    formDirective.resetForm();
-    this.registerForm.reset();
+    this.error = null;
+    this.serverService.registerUser(email, password, username).subscribe(
+      res => {
+        formDirective.resetForm();
+        this.registerForm.reset();
+        this.registerSucess = true;
+      },
+      err => {
+        this.error = err.error.message;
+      }
+      );
   }
 }
