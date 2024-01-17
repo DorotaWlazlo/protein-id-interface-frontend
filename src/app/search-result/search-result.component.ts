@@ -48,7 +48,8 @@ export class SearchResultComponent {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.serverService.searchResult.proteins = this.serverService.proteins.filter((el: { name: string }) => el.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
-}
+    this.serverService.searchResult.proteins = this.serverService.proteins.filter((
+      el: { name: string }) => el.name.toLowerCase().includes(filterValue.trim().toLowerCase()))
+  }
 
 }

@@ -59,6 +59,7 @@ export class RegisterFormComponent {
         this.registerSucess = true;
       },
       err => {
+        this.getErrorPassword()
         this.error = err.error.message;
       }
       );

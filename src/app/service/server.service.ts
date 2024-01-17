@@ -89,6 +89,7 @@ export class ServerService {
     headers = this.addAuthHeader(headers);
     const sendFormData = new FormData();
     sendFormData.append('username', username!)
+    console.log(sendFormData.getAll('username'))
     return this.http.post<any[]>(`${environment.apiUrl}auth/searches`, sendFormData, {headers: headers})
   }
 
