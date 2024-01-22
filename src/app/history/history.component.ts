@@ -10,6 +10,7 @@ export class HistoryComponent implements OnInit{
   constructor (public serverService: ServerService) {}
 
   searches: any[]
+  searchesList: any[]
   displayedColumns: string[] = ['title'];
   dataSource: any[]
   clicked = false
@@ -24,6 +25,7 @@ export class HistoryComponent implements OnInit{
     this.serverService.getSearches().subscribe(res => {
       this.searches = res
       this.dataSource = this.searches;
+      this.searchesList = res;
     })
   }
 
@@ -34,5 +36,11 @@ export class HistoryComponent implements OnInit{
       this.serverService.searchResult = res
       this.serverService.proteins = this.serverService.searchResult.proteins
     })
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value; 
+    this.dataSource = this.searches.filter((
+      el: { title: string }) => el.title.toLowerCase().includes(filterValue.trim().toLowerCase()))
   }
 }

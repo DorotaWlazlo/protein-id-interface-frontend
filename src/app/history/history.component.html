@@ -1,7 +1,8 @@
 <div class="column"> 
-    <table mat-table style = "margin-top: 20px;" [dataSource]="dataSource">
+    <input matInput (keyup)="applyFilter($event)" style="width: 97%; height: 50px" placeholder="Search">
+    <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="title">
-            <th mat-header-cell *matHeaderCellDef class="header" > Search history </th>
+            <th mat-header-cell *matHeaderCellDef class="header" > Search history </th>        
             <td mat-cell (click)="getSearch(search.id)" style="cursor: pointer" *matCellDef="let search"> {{search.title}} </td>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
