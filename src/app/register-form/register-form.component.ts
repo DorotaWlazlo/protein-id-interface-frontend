@@ -29,7 +29,7 @@ export class RegisterFormComponent {
   }
 
   emailErrors() {
-    return this.registerForm.get('email')!.hasError('pattern') ? 'Not a valid emailaddress' :''
+    return this.registerForm.get('email')!.hasError('pattern') ? 'Not a valid email address' :''
   }
 
   checkPassword(control: { value: any; }) {
